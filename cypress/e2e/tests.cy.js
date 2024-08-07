@@ -33,7 +33,18 @@ let url = params.url();
 
   })
 
- 
+  it('Create Bird', () => {
+    
+    cy.request({
+      method: 'POST',
+      url: url +'/v2/pet',
+      body: data.bodyPayloadBird()
+    })
+      .then((response) => {
+        expect(response.status).to.eq(200)
+      })
+
+  })
 
   it('update dog photo', () => {
     
@@ -59,14 +70,6 @@ let url = params.url();
         expect(response.status).to.eq(200)
       })
 
-  })
-
-  it('Check Dog', () => {
-
-    cy.request('GET', url +`/v2/pet/267646`)
-      .then((response) => {
-        expect(response.status).to.eq(200)
-      })
   })
 
   it('Check Cat', () => {
@@ -95,9 +98,11 @@ let url = params.url();
   })
 
   it('DeleteDog', () => {
-
-    cy.request('DELETE', url +`/v2/pet/267646`)
-      .then((response) => {
+    cy.request({ 
+      method: 'DELETE',
+     url: url + `/v2/pet/267646`,
+     headers: data.headerPayload()
+ }).then((response) => {
         expect(response.status).to.eq(200)
         
       })
@@ -115,6 +120,31 @@ let url = params.url();
         expect(response.status).to.eq(404);
         expect(response.body.type).to.eq('error');
         
+      })
+  })
+
+
+  it('Order Bird', () => {
+
+    cy.request({ 
+      method: 'POST',
+     url: url +'/v2/store/order',
+     body:data.orderBird('342553',1)
+ })
+      .then((response) => {
+        expect(response.status).to.eq(200);        
+      })
+  })
+
+  it('Delete Order Bird', () => {
+
+    cy.request({ 
+      method: 'DELETE',
+     url:'https://petstore.swagger.io/v2/store/order/342553'
+     
+ })
+      .then((response) => {
+        expect(response.status).to.eq(200);        
       })
   })
 })

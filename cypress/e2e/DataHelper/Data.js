@@ -96,5 +96,51 @@ class Data{
         return postData;
     }
 
+    bodyPayloadBird() {
+      const postData ={
+        "id": 342553,
+        "category": {
+          "id": 342553,
+          "name": "string"
+        },
+        "name": "Birdie",
+        "photoUrls": [
+          "string"
+        ],
+        "tags": [
+          {
+            "id": 0,
+            "name": "Maviş"
+          }
+        ],
+        "status": "available"
+      }
+      return postData;
+  }
+
+  orderBird(id,quantity) {
+    const postData ={
+      "id":id,
+      "petId": id,
+      "quantity": quantity,
+      "shipDate": "2024-08-07T11:22:36.133Z",
+      "status": "placed",
+      "complete": true
+    }
+    return postData;
+}
+
+orderBird(id,quantity) {
+  const postData ={
+    "id":id,
+    "petId": id,
+    "quantity": quantity,
+    "shipDate": "2024-08-07T11:22:36.133Z",
+    "status": "placed",
+    "complete": true
+  }
+  return postData;
+}
+
 }
 export default Data
